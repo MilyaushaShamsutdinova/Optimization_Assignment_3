@@ -1,0 +1,6 @@
+# ninja log v5
+1	318	7210853159720084	build.ninja	cb860cd316d56c57
+0	464	7210853165430448	CMakeFiles/Optimization_Assignment_3.dir/main.cpp.obj	94015964265da80a
+15	645	7210853167240998	CMakeFiles/Optimization_Assignment_3.dir/source/Matrix.cpp.obj	ac0f28b45df0aede
+8	713	7210853167935197	CMakeFiles/Optimization_Assignment_3.dir/source/Vector.cpp.obj	3bab4bad25c8ed76
+713	1199	7210853172721558	Optimization_Assignment_3.exe	329fa64a99a40652
