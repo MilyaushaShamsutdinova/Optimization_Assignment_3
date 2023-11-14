@@ -9,9 +9,7 @@ void NorthwestCornerMethod::start_method(const Matrix &C, Vector &S, Vector &D){
     cout << "-------------------------------------------\n";
     cout << "--------- Northwest Corner Method ---------\n";
     cout << "-------------------------------------------\n\n";
-    //print input parameter table
     printInitialTable(C,S,D);
-    //print that it is northsest method
 
     if(problemIsSolvable){
         Matrix X = Matrix(C.rows(), C.columns());
@@ -61,7 +59,7 @@ bool NorthwestCornerMethod::isSolvable(const Matrix &C, Vector &S, Vector &D){
 }
 
 void NorthwestCornerMethod::printInitialTable(const Matrix &C, Vector &S, Vector &D){
-    cout << "Initial table:\n";
+    cout << "--Initial table--\n";
     int sum = 0;
 
     for(int i = 0; i < C.rows(); i++){
@@ -86,8 +84,7 @@ void NorthwestCornerMethod::setValues(Matrix &X, Vector &S, Vector &D, int i, in
 }
 
 void NorthwestCornerMethod::printSolution(Matrix &X, const Matrix &C){
-
-    cout << "Initial basic feasible solution:\n\n";
+    cout << "--Initial basic feasible solution--\n\n";
     cout << "Matrix X:\n";
     for (int i = 0; i < X.rows(); i++){
         for(int j = 0; j < X.columns(); j++){
