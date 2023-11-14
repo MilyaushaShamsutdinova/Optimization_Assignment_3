@@ -18,8 +18,11 @@ public:
 private:
 
     static bool isSolvable(const Matrix &C, Vector &S, Vector &D);
+
     static void printInitialTable(const Matrix &C, Vector &S, Vector &D);
+
     static void setValues(Matrix &X, Vector &S, Vector &D, int i, int j);
+
     static void printSolution(Matrix &X, const Matrix &C);
 
 };
