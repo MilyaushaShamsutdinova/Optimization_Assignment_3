@@ -1,6 +1,17 @@
 # ninja log v5
-1	318	7210853159720084	build.ninja	cb860cd316d56c57
-0	464	7210853165430448	CMakeFiles/Optimization_Assignment_3.dir/main.cpp.obj	94015964265da80a
-15	645	7210853167240998	CMakeFiles/Optimization_Assignment_3.dir/source/Matrix.cpp.obj	ac0f28b45df0aede
-8	713	7210853167935197	CMakeFiles/Optimization_Assignment_3.dir/source/Vector.cpp.obj	3bab4bad25c8ed76
-713	1199	7210853172721558	Optimization_Assignment_3.exe	329fa64a99a40652
+6	757	7216553035340844	CMakeFiles/Optimization_Assignment_3.dir/main.cpp.obj	94015964265da80a
+1	318	7216565011980397	build.ninja	cb860cd316d56c57
+24	1341	7216550154834579	CMakeFiles/Optimization_Assignment_3.dir/source/Matrix.cpp.obj	ac0f28b45df0aede
+68	1309	7216550154509158	CMakeFiles/Optimization_Assignment_3.dir/source/Vector.cpp.obj	3bab4bad25c8ed76
+700	974	7216555867794521	Optimization_Assignment_3.exe	9770c3da34eff759
+6	699	7216555865109968	CMakeFiles/Optimization_Assignment_3.dir/source/NorthwestCornerMethod.cpp.obj	57622419e6129b03
+2	664	7216565011980397	build.ninja	cb860cd316d56c57
+9	738	7216565022378447	CMakeFiles/Optimization_Assignment_3.dir/main.cpp.obj	94015964265da80a
+80	753	7216565022528507	CMakeFiles/Optimization_Assignment_3.dir/source/NorthwestCornerMethod.cpp.obj	57622419e6129b03
+753	1032	7216565025177754	Optimization_Assignment_3.exe	9770c3da34eff759
+7	739	7216565528378317	CMakeFiles/Optimization_Assignment_3.dir/source/NorthwestCornerMethod.cpp.obj	57622419e6129b03
+739	1004	7216565530880844	Optimization_Assignment_3.exe	9770c3da34eff759
+9	978	7216568611060242	CMakeFiles/Optimization_Assignment_3.dir/source/NorthwestCornerMethod.cpp.obj	57622419e6129b03
+979	1275	7216568614020579	Optimization_Assignment_3.exe	9770c3da34eff759
+6	742	7216569422101380	CMakeFiles/Optimization_Assignment_3.dir/source/NorthwestCornerMethod.cpp.obj	57622419e6129b03
+742	992	7216569424526878	Optimization_Assignment_3.exe	9770c3da34eff759
