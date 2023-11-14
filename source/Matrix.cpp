@@ -1,5 +1,7 @@
 #include "../headers/Matrix.hpp"
 
+#include <algorithm>
+
 using namespace std;
 
 Matrix::Matrix() {
@@ -241,4 +243,27 @@ Matrix Matrix::inverse() {
     }
 
     return inverse_matrix;
+}
+
+double Matrix::max_in_row(int row_index) const {
+    if (row_index < 0 || row_index >= rows_) {
+        throw out_of_range("Row index is out of range.");
+    }
+
+    auto max_in_row_iter = max_element(data_[row_index].begin(), data_[row_index].end());
+
+    return (max_in_row_iter != data_[row_index].end()) ? *max_in_row_iter : 0.0;
+}
+
+double Matrix::max_in_col(int col_index) const {
+    if (col_index < 0 || col_index >= columns_) {
+        throw out_of_range("Column index is out of range.");
+    }
+
+    double max_in_col = data_[0][col_index];
+    for (int i = 1; i < rows_; ++i) {
+        max_in_col = max(max_in_col, data_[i][col_index]);
+    }
+
+    return max_in_col;
 }

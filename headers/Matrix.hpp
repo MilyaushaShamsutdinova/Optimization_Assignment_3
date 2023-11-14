@@ -49,6 +49,10 @@ public:
 
     Matrix inverse();
 
+    double max_in_row(int row_index) const;
+
+    double max_in_col(int col_index) const;
+
     //overloaded ostream operator
     friend std::ostream &operator<<(std::ostream &os, const Matrix &item) {
         for (int i = 0; i < item.rows(); ++i) {
