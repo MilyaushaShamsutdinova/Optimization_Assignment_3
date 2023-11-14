@@ -63,6 +63,13 @@ build CMakeFiles/Optimization_Assignment_3.dir/source/NorthwestCornerMethod.cpp.
   OBJECT_DIR = CMakeFiles\Optimization_Assignment_3.dir
   OBJECT_FILE_DIR = CMakeFiles\Optimization_Assignment_3.dir\source
 
+build CMakeFiles/Optimization_Assignment_3.dir/source/RusselsMethod.cpp.obj: CXX_COMPILER__Optimization_Assignment_3_Debug M$:/Innopolis_Study/II$ Semester/C++_Projects/Optimization_Assignment_3/source/RusselsMethod.cpp || cmake_object_order_depends_target_Optimization_Assignment_3
+  DEP_FILE = CMakeFiles\Optimization_Assignment_3.dir\source\RusselsMethod.cpp.obj.d
+  FLAGS = -g -std=gnu++14
+  INCLUDES = -I"M:/Innopolis_Study/II Semester/C++_Projects/Optimization_Assignment_3/headers"
+  OBJECT_DIR = CMakeFiles\Optimization_Assignment_3.dir
+  OBJECT_FILE_DIR = CMakeFiles\Optimization_Assignment_3.dir\source
+
 build CMakeFiles/Optimization_Assignment_3.dir/source/Vector.cpp.obj: CXX_COMPILER__Optimization_Assignment_3_Debug M$:/Innopolis_Study/II$ Semester/C++_Projects/Optimization_Assignment_3/source/Vector.cpp || cmake_object_order_depends_target_Optimization_Assignment_3
   DEP_FILE = CMakeFiles\Optimization_Assignment_3.dir\source\Vector.cpp.obj.d
   FLAGS = -g -std=gnu++14
@@ -85,8 +92,9 @@ build CMakeFiles/Optimization_Assignment_3.dir/main.cpp.obj: CXX_COMPILER__Optim
 #############################################
 # Link the executable Optimization_Assignment_3.exe
 
-build Optimization_Assignment_3.exe: CXX_EXECUTABLE_LINKER__Optimization_Assignment_3_Debug CMakeFiles/Optimization_Assignment_3.dir/source/Matrix.cpp.obj CMakeFiles/Optimization_Assignment_3.dir/source/NorthwestCornerMethod.cpp.obj CMakeFiles/Optimization_Assignment_3.dir/source/Vector.cpp.obj CMakeFiles/Optimization_Assignment_3.dir/main.cpp.obj
+build Optimization_Assignment_3.exe: CXX_EXECUTABLE_LINKER__Optimization_Assignment_3_Debug CMakeFiles/Optimization_Assignment_3.dir/source/Matrix.cpp.obj CMakeFiles/Optimization_Assignment_3.dir/source/NorthwestCornerMethod.cpp.obj CMakeFiles/Optimization_Assignment_3.dir/source/RusselsMethod.cpp.obj CMakeFiles/Optimization_Assignment_3.dir/source/Vector.cpp.obj CMakeFiles/Optimization_Assignment_3.dir/main.cpp.obj
   FLAGS = -g
+  LINK_FLAGS = -static-libstdc++ -static-libgcc -static-libgcc -static-libstdc++
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Optimization_Assignment_3.dir
   POST_BUILD = cd .

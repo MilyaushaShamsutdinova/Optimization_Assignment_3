@@ -13,7 +13,8 @@ using namespace std;
 
 class NorthwestCornerMethod {
 public:
-    static void start_method(const Matrix &C, Vector &S, Vector &D);
+
+    static void start_method(Matrix C, Vector S, Vector D);
 
 private:
 

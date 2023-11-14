@@ -72,7 +72,8 @@
 				0,
 				1,
 				2,
-				6
+				3,
+				8
 			]
 		}
 	],
@@ -86,7 +87,7 @@
 				"role" : "flags"
 			},
 			{
-				"fragment" : "",
+				"fragment" : "-static-libstdc++ -static-libgcc -static-libgcc -static-libstdc++",
 				"role" : "flags"
 			},
 			{
@@ -112,16 +113,18 @@
 				0,
 				1,
 				2,
-				6
+				3,
+				8
 			]
 		},
 		{
 			"name" : "Header Files",
 			"sourceIndexes" : 
 			[
-				3,
 				4,
-				5
+				5,
+				6,
+				7
 			]
 		}
 	],
@@ -142,6 +145,12 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
+			"path" : "source/RusselsMethod.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
 			"path" : "source/Vector.cpp",
 			"sourceGroupIndex" : 0
 		},
@@ -153,6 +162,11 @@
 		{
 			"backtrace" : 1,
 			"path" : "headers/NorthwestCornerMethod.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "headers/RusselsMethod.hpp",
 			"sourceGroupIndex" : 1
 		},
 		{

@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void NorthwestCornerMethod::start_method(const Matrix &C, Vector &S, Vector &D){
+void NorthwestCornerMethod::start_method(Matrix C, Vector S, Vector D){
     printInitialTable(C,S,D);
 
     cout << "-------------------------------------------\n";
@@ -100,6 +100,6 @@ void NorthwestCornerMethod::printSolution(Matrix &X, const Matrix &C){
             cost += X(i,j)*C(i,j);
         }
     }
-    cout << "The total distribution cost = " << cost << "\n";
+    cout << "The total distribution cost = " << cost << "\n\n";
 }
 

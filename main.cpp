@@ -24,7 +24,7 @@ void perform() {
 
     NorthwestCornerMethod::start_method(C,S,D);
 
-    //Vogel method
+    //VogelMethod::start_method.....
 
     RusselsMethod::start_method(C,S,D);
 }

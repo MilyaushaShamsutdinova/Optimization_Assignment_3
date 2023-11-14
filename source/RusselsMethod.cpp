@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void RusselsMethod::start_method(const Matrix &C, Vector &S, Vector &D){
+void RusselsMethod::start_method(Matrix C, Vector S, Vector D){
     cout << "-------------------------------------------\n";
     cout << "------------- Russel's Method -------------\n";
     cout << "-------------------------------------------\n\n";
@@ -108,7 +108,7 @@ void RusselsMethod::printSolution(Matrix &X, const Matrix &C){
             cost += X(i,j)*C(i,j);
         }
     }
-    cout << "The total distribution cost = " << cost << "\n";
+    cout << "The total distribution cost = " << cost << "\n\n";
 }
 
 Vector RusselsMethod::max_coordinates(Matrix &Delta, Vector &usable_rows, Vector &usable_cols, int m, int n) {
