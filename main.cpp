@@ -10,17 +10,21 @@ using namespace std;
 void perform() {
     int n, m;
 
-    //cout << "Enter number of basic variables:\n";
+    cout << "Enter number of sources:\n";
     cin >> m;
-    //cout << "Enter number of constraint functions:\n";
+    cout << "Enter number of destinations:\n";
     cin >> n;
 
     Vector S(m), D(n);
     Matrix C(m, n);
 
+    cout << "Enter the transportation cost table:\n";
     cin >> C;
+    cout << "Enter the vector of supply:\n";
     cin >> S;
+    cout << "Enter the vector of demand:\n";
     cin >> D;
+    cout << "\n\n";
 
     NorthwestCornerMethod::start_method(C,S,D);
 

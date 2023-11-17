@@ -100,6 +100,6 @@ void NorthwestCornerMethod::printSolution(Matrix &X, const Matrix &C){
             cost += X(i,j)*C(i,j);
         }
     }
-    cout << "The total distribution cost = " << cost << "\n\n";
+    cout << "--The total distribution cost = " << cost << "\n\n";
 }
 

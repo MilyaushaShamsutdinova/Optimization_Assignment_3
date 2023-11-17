@@ -15,33 +15,33 @@ void RusselsMethod::start_method(Matrix C, Vector S, Vector D){
         int n = C.columns();
 
         Matrix X = Matrix(m, n);
-        Matrix U = Matrix(m, 1);
-        Matrix V = Matrix(1, n);
+        Vector U = Vector(m);
+        Vector V = Vector(n);
 
-        Matrix ones_row = Matrix(1, n);
-        Matrix ones_col = Matrix(m, 1);
         Vector usable_rows = Vector(m, 1);
         Vector usable_cols = Vector(n, 1);
 
         for(int row = 0; row < m; row++){
-            U(row, 0) = C.max_in_row(row);
-            ones_col(row, 0) = 1;
+            U[row] = C.max_in_row(row);
         }
         for(int col = 0; col < n; col++){
-            V(0, col) = C.max_in_col(col);
-            ones_row(0, col) = 1;
+            V[col] = C.max_in_col(col);
         }
 
-        Matrix Delta = C - U*ones_row - ones_col*V;
+        Matrix Delta = Matrix(m, n);
+        for(int i = 0; i < m; i++){
+            for(int j = 0; j < n; j++){
+                Delta(i,j) = C(i,j) - U[i] - V[j];
+            }
+        }
 
         while(true){
-            Vector maxCoordinates = max_coordinates(Delta, usable_rows, usable_cols, m, n);
+            Vector maxCoordinates = max_coordinates(Delta, C, usable_rows, usable_cols, m, n);
             if(maxCoordinates[0] == -1 || maxCoordinates[1] == -1){
                 break;
             }
             setValues(X, S, D, maxCoordinates[0], maxCoordinates[1]);
 
-            //continue
             if(S[maxCoordinates[0]] == 0){
                 usable_rows[maxCoordinates[0]] = 0;
             }
@@ -93,7 +93,6 @@ void RusselsMethod::setValues(Matrix &X, Vector &S, Vector &D, int i, int j){
 }
 
 void RusselsMethod::printSolution(Matrix &X, const Matrix &C){
-//    cout << "--Initial basic feasible solution--\n\n";
     cout << "--Matrix X--\n";
     for (int i = 0; i < X.rows(); i++){
         for(int j = 0; j < X.columns(); j++){
@@ -108,10 +107,10 @@ void RusselsMethod::printSolution(Matrix &X, const Matrix &C){
             cost += X(i,j)*C(i,j);
         }
     }
-    cout << "The total distribution cost = " << cost << "\n\n";
+    cout << "--The total distribution cost = " << cost << "\n\n";
 }
 
-Vector RusselsMethod::max_coordinates(Matrix &Delta, Vector &usable_rows, Vector &usable_cols, int m, int n) {
+Vector RusselsMethod::max_coordinates(Matrix &Delta, Matrix &C, Vector &usable_rows, Vector &usable_cols, int m, int n) {
     Vector maxCoordinates = Vector(2, -1);
     for(int i = 0; i < m; i++){
         if(usable_rows[i] == 0){
@@ -125,7 +124,8 @@ Vector RusselsMethod::max_coordinates(Matrix &Delta, Vector &usable_rows, Vector
                 maxCoordinates[0] = i;
                 maxCoordinates[1] = j;
             }
-            if(Delta(i,j) < Delta(maxCoordinates[0],maxCoordinates[1])){
+            if(Delta(i,j) <= Delta(maxCoordinates[0],maxCoordinates[1]) &&
+                    C(i,j) < C(maxCoordinates[0],maxCoordinates[1])){
                 maxCoordinates[0] = i;
                 maxCoordinates[1] = j;
             }
