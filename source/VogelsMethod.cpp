@@ -1,4 +1,5 @@
 #include "../headers/VogelsMethod.hpp"
+
 #include <iostream>
 #include <climits>
 

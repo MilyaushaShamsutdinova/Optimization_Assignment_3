@@ -3,6 +3,7 @@
 #include "headers/Matrix.hpp"
 #include "headers/Vector.hpp"
 #include "headers/NorthwestCornerMethod.hpp"
+#include "headers/VogelsMethod.hpp"
 #include "headers/RusselsMethod.hpp"
 
 using namespace std;
@@ -28,7 +29,7 @@ void perform() {
 
     NorthwestCornerMethod::start_method(C,S,D);
 
-    //VogelMethod::start_method.....
+    VogelsMethod::start_method(C,S,D);
 
     RusselsMethod::start_method(C,S,D);
 }
