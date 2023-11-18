@@ -11,72 +11,57 @@ void VogelsMethod::start_method(Matrix C, Vector S, Vector D) {
     cout << "-------------------------------------------\n\n";
 
     bool problemIsSolvable = isSolvable(C, S, D);
+    Matrix C_copy = Matrix(C);
 
     if (problemIsSolvable) {
         int m = C.rows();
         int n = C.columns();
 
-        printInitialTable(C, S, D); // Печать начальной таблицы
-
         Matrix X = Matrix(m, n);
-        Vector row_d = Vector(m, 0);
-        Vector col_d = Vector(n, 0);
+        Vector row_difference = Vector(m, 0);
+        Vector col_difference = Vector(n, 0);
 
-        calculate_row_difference(C, row_d, col_d, m, n);
-        calculate_col_difference(C, row_d, col_d, m, n);
+        calculate_row_difference(C, row_difference);
+        calculate_col_difference(C, col_difference);
 
         while (true) {
-            int max_row_ind = max_ind(row_d);
-            int max_col_ind = max_ind(col_d);
+            int index_of_max_row_difference = index_of_max_element(row_difference);
+            int index_of_max_col_difference = index_of_max_element(col_difference);
+            int col_index, row_index;
 
-            if (row_d[max_row_ind] < 0 || col_d[max_col_ind] < 0) {
+            if (row_difference[index_of_max_row_difference] < 0 || col_difference[index_of_max_col_difference] < 0) {
                 break;
             }
 
-            if (row_d[max_row_ind] > col_d[max_col_ind]) {
-                int min_i = find_min_ind_in_row(C, row_d, max_row_ind, m, n);
-                set_value(X, S, D, max_row_ind, min_i);
-                row_d[max_row_ind] = -1;
+            if (row_difference[index_of_max_row_difference] > col_difference[index_of_max_col_difference]) {
+                row_index = index_of_max_row_difference;
+                col_index = index_of_min_element_in_row(C, row_index);
 
-                if (D[min_i] == 0) {
-                    col_d[min_i] = -1;
-                }
-
-                // Mark the row as deleted
-                for (int j = 0; j < n; ++j) {
-                    C(max_row_ind, j) = INT_MAX;
-                }
-
-                calculate_col_difference(C, row_d, col_d, m, n);
+                set_value(X, S, D, row_index, col_index);
             } else {
-                int min_i = find_min_ind_in_col(C, col_d, max_col_ind, m, n);
-                set_value(X, S, D, min_i, max_col_ind);
-                col_d[max_col_ind] = -1;
+                col_index = index_of_max_col_difference;
+                row_index = index_of_min_element_in_col(C, col_index);
 
-                if (S[min_i] == 0) {
-                    row_d[min_i] = -1;
-                }
+                set_value(X, S, D, row_index, col_index);
+            }
 
-                // Mark the column as deleted
+            if(D[col_index] == 0) {
+                col_difference[col_index] = -1;
                 for (int i = 0; i < m; ++i) {
-                    C(i, max_col_ind) = INT_MAX;
+                    C(i, col_index) = INT_MAX;
                 }
-
-                calculate_row_difference(C, row_d, col_d, m, n);
+                calculate_row_difference(C, row_difference);
+            }
+            if (S[row_index] == 0) {
+                row_difference[row_index] = -1;
+                for (int i = 0; i < n; ++i) {
+                    C(row_index, i) = INT_MAX;
+                }
+                calculate_col_difference(C, col_difference);
             }
         }
 
-        cout << "--Distribution Table--\n";
-        // Вывод таблицы X
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                cout << X(i, j) << " ";
-            }
-            cout << "\n";
-        }
-
-        int total_cost = calculateTotalCost(X, C);
-        cout << "The total distribution cost = " << total_cost << "\n";
+        printSolution(X, C_copy);
     }
 }
 
@@ -111,10 +96,10 @@ bool VogelsMethod::isSolvable(const Matrix &C, const Vector &S, const Vector &D)
     return true;
 }
 
-void VogelsMethod::calculate_row_difference(const Matrix &C, Vector &row_d, Vector &col_d, int m, int n) {
-    for (int i = 0; i < m; i++) {
+void VogelsMethod::calculate_row_difference(const Matrix &C, Vector &row_difference) {
+    for (int i = 0; i < C.rows(); i++) {
         int min1 = INT_MAX, min2 = INT_MAX;
-        for (int j = 0; j < n; j++) {
+        for (int j = 0; j < C.columns(); j++) {
             if (C(i, j) < min1) {
                 min2 = min1;
                 min1 = C(i, j);
@@ -122,14 +107,21 @@ void VogelsMethod::calculate_row_difference(const Matrix &C, Vector &row_d, Vect
                 min2 = C(i, j);
             }
         }
-        row_d[i] = min2 - min1;
+
+        if(min1 == INT_MAX){
+            row_difference[i] = -1;
+        } else if(min2 == INT_MAX) {
+            row_difference[i] = 1;
+        } else {
+            row_difference[i] = min2 - min1;
+        }
     }
 }
 
-void VogelsMethod::calculate_col_difference(const Matrix &C, Vector &row_d, Vector &col_d, int m, int n) {
-    for (int j = 0; j < n; j++) {
+void VogelsMethod::calculate_col_difference(const Matrix &C, Vector &col_difference) {
+    for (int j = 0; j < C.columns(); j++) {
         int min1 = INT_MAX, min2 = INT_MAX;
-        for (int i = 0; i < m; i++) {
+        for (int i = 0; i < C.rows(); i++) {
             if (C(i, j) < min1) {
                 min2 = min1;
                 min1 = C(i, j);
@@ -137,47 +129,54 @@ void VogelsMethod::calculate_col_difference(const Matrix &C, Vector &row_d, Vect
                 min2 = C(i, j);
             }
         }
-        col_d[j] = min2 - min1;
+
+        if(min1 == INT_MAX){
+            col_difference[j] = -1;
+        } else if(min2 == INT_MAX) {
+            col_difference[j] = 1;
+        } else {
+            col_difference[j] = min2 - min1;
+        }
     }
 }
 
-int VogelsMethod::max_ind(Vector &vec) {
-    int max_index = 0;
+int VogelsMethod::index_of_max_element(Vector &vec) {
+    int index = 0;
     int max_val = vec[0];
 
     for (int i = 1; i < vec.size(); i++) {
         if (vec[i] > max_val) {
             max_val = vec[i];
-            max_index = i;
+            index = i;
         }
     }
-    return max_index;
+    return index;
 }
 
-int VogelsMethod::find_min_ind_in_row(const Matrix &C, Vector &row_d, int row, int m, int n) {
+int VogelsMethod::index_of_min_element_in_row(const Matrix &C, int row_index) {
     int min_val = INT_MAX;
-    int min_index = -1;
+    int index = -1;
 
-    for (int j = 0; j < n; j++) {
-        if (C(row, j) < min_val && row_d[j] == 0) {
-            min_val = C(row, j);
-            min_index = j;
+    for (int j = 0; j < C.columns(); j++) {
+        if (C(row_index, j) < min_val) {
+            min_val = C(row_index, j);
+            index = j;
         }
     }
-    return min_index;
+    return index;
 }
 
-int VogelsMethod::find_min_ind_in_col(const Matrix &C, Vector &col_d, int col, int m, int n) {
+int VogelsMethod::index_of_min_element_in_col(const Matrix &C, int col_index) {
     int min_val = INT_MAX;
-    int min_index = -1;
+    int index = -1;
 
-    for (int i = 0; i < m; i++) {
-        if (C(i, col) < min_val && col_d[i] == 0) {
-            min_val = C(i, col);
-            min_index = i;
+    for (int i = 0; i < C.rows(); i++) {
+        if (C(i, col_index) < min_val) {
+            min_val = C(i, col_index);
+            index = i;
         }
     }
-    return min_index;
+    return index;
 }
 
 void VogelsMethod::set_value(Matrix &X, Vector &S, Vector &D, int i, int j) {
@@ -187,44 +186,21 @@ void VogelsMethod::set_value(Matrix &X, Vector &S, Vector &D, int i, int j) {
     D[j] -= min_val;
 }
 
-void VogelsMethod::printInitialTable(const Matrix &C, Vector &S, Vector &D) {
-    cout << "--Initial table--\n";
 
-    for (int i = 0; i < C.rows(); i++) {
-        for (int j = 0; j < C.columns(); j++) {
-            cout << C(i, j) << " ";
+void VogelsMethod::printSolution(Matrix &X, const Matrix &C){
+    cout << "--Matrix X--\n";
+    for (int i = 0; i < X.rows(); i++){
+        for(int j = 0; j < X.columns(); j++){
+            cout << X(i,j) << " ";
         }
-        cout << S[i] << "\n";
-    }
-    for (int j = 0; j < D.size(); j++) {
-        cout << D[j] << " ";
-    }
-    cout << "\n\n";
-}
-
-bool VogelsMethod::check_unbalanced_problem(Matrix &X, Vector &S, Vector &D, int m, int n) {
-    int sum_S = 0, sum_D = 0;
-
-    for (int i = 0; i < S.size(); i++) {
-        sum_S += S[i];
-    }
-    for (int i = 0; i < D.size(); i++) {
-        sum_D += D[i];
+        cout << "\n";
     }
 
-    if (sum_S != sum_D) {
-        return true;
-    }
-
-    return false;
-}
-
-int VogelsMethod::calculateTotalCost(Matrix &X, const Matrix &C) {
-    int total_cost = 0;
-    for (int i = 0; i < X.rows(); ++i) {
-        for (int j = 0; j < X.columns(); ++j) {
-            total_cost += X(i, j) * C(i, j);
+    int cost = 0;
+    for (int i = 0; i < X.rows(); i++){
+        for(int j = 0; j < X.columns(); j++){
+            cost += X(i,j)*C(i,j);
         }
     }
-    return total_cost;
+    cout << "--The total distribution cost = " << cost << "\n\n";
 }
