@@ -24,7 +24,7 @@ private:
 
     static void printSolution(Matrix &X, const Matrix &C);
 
-    static Vector max_coordinates(Matrix &D, Matrix &C, Vector &usable_rows, Vector &usable_cols, int m, int n);
+    static Vector max_coordinates(Matrix &D, Matrix &C, Vector &usable_rows, Vector &usable_cols);
 
 };
 

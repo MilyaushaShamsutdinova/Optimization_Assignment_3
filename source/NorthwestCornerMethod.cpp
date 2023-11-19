@@ -29,7 +29,7 @@ void NorthwestCornerMethod::start_method(Matrix C, Vector S, Vector D){
 }
 
 bool NorthwestCornerMethod::isSolvable(const Matrix &C, Vector &S, Vector &D){
-    int sum_S = 0, sum_D = 0;
+    double sum_S = 0, sum_D = 0;
     int num_of_negative_elements = 0;
 
     for(int i = 0; i < S.size(); i++){
@@ -61,7 +61,7 @@ bool NorthwestCornerMethod::isSolvable(const Matrix &C, Vector &S, Vector &D){
 
 void NorthwestCornerMethod::printInitialTable(const Matrix &C, Vector &S, Vector &D){
     cout << "--Initial table--\n";
-    int sum = 0;
+    double sum = 0;
 
     for(int i = 0; i < C.rows(); i++){
         for(int j = 0; j < C.columns(); j++){
@@ -94,7 +94,7 @@ void NorthwestCornerMethod::printSolution(Matrix &X, const Matrix &C){
         cout << "\n";
     }
 
-    int cost = 0;
+    double cost = 0;
     for (int i = 0; i < X.rows(); i++){
         for(int j = 0; j < X.columns(); j++){
             cost += X(i,j)*C(i,j);

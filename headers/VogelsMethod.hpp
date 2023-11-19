@@ -30,6 +30,6 @@ private:
 
     static void printSolution(Matrix &X, const Matrix &C);
 
-    //static bool check_unbalanced_problem(Matrix &X, Vector &S, Vector &D, int m, int n);
 };
+
 #endif //OPTIMIZATION_ASSIGNMENT_3_VOGELSMETHOD_HPP

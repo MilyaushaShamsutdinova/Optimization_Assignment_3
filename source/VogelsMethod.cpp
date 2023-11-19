@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <climits>
+#include <cfloat>
 
 using namespace std;
 
@@ -66,7 +67,7 @@ void VogelsMethod::start_method(Matrix C, Vector S, Vector D) {
 }
 
 bool VogelsMethod::isSolvable(const Matrix &C, const Vector &S, const Vector &D) {
-    int sum_S = 0, sum_D = 0;
+    double sum_S = 0, sum_D = 0;
     int num_of_negative_elements = 0;
 
     for (int i = 0; i < S.size(); i++) {
@@ -98,7 +99,7 @@ bool VogelsMethod::isSolvable(const Matrix &C, const Vector &S, const Vector &D)
 
 void VogelsMethod::calculate_row_difference(const Matrix &C, Vector &row_difference) {
     for (int i = 0; i < C.rows(); i++) {
-        int min1 = INT_MAX, min2 = INT_MAX;
+        auto min1 = DBL_MAX, min2 = DBL_MAX;
         for (int j = 0; j < C.columns(); j++) {
             if (C(i, j) < min1) {
                 min2 = min1;
@@ -108,9 +109,9 @@ void VogelsMethod::calculate_row_difference(const Matrix &C, Vector &row_differe
             }
         }
 
-        if(min1 == INT_MAX){
+        if(min1 == DBL_MAX){
             row_difference[i] = -1;
-        } else if(min2 == INT_MAX) {
+        } else if(min2 == DBL_MAX) {
             row_difference[i] = 1;
         } else {
             row_difference[i] = min2 - min1;
@@ -120,7 +121,7 @@ void VogelsMethod::calculate_row_difference(const Matrix &C, Vector &row_differe
 
 void VogelsMethod::calculate_col_difference(const Matrix &C, Vector &col_difference) {
     for (int j = 0; j < C.columns(); j++) {
-        int min1 = INT_MAX, min2 = INT_MAX;
+        auto min1 = DBL_MAX, min2 = DBL_MAX;
         for (int i = 0; i < C.rows(); i++) {
             if (C(i, j) < min1) {
                 min2 = min1;
@@ -130,9 +131,9 @@ void VogelsMethod::calculate_col_difference(const Matrix &C, Vector &col_differe
             }
         }
 
-        if(min1 == INT_MAX){
+        if(min1 == DBL_MAX){
             col_difference[j] = -1;
-        } else if(min2 == INT_MAX) {
+        } else if(min2 == DBL_MAX) {
             col_difference[j] = 1;
         } else {
             col_difference[j] = min2 - min1;
@@ -142,7 +143,7 @@ void VogelsMethod::calculate_col_difference(const Matrix &C, Vector &col_differe
 
 int VogelsMethod::index_of_max_element(Vector &vec) {
     int index = 0;
-    int max_val = vec[0];
+    double max_val = vec[0];
 
     for (int i = 1; i < vec.size(); i++) {
         if (vec[i] > max_val) {
@@ -154,7 +155,7 @@ int VogelsMethod::index_of_max_element(Vector &vec) {
 }
 
 int VogelsMethod::index_of_min_element_in_row(const Matrix &C, int row_index) {
-    int min_val = INT_MAX;
+    auto min_val = DBL_MAX;
     int index = -1;
 
     for (int j = 0; j < C.columns(); j++) {
@@ -167,7 +168,7 @@ int VogelsMethod::index_of_min_element_in_row(const Matrix &C, int row_index) {
 }
 
 int VogelsMethod::index_of_min_element_in_col(const Matrix &C, int col_index) {
-    int min_val = INT_MAX;
+    auto min_val = DBL_MAX;
     int index = -1;
 
     for (int i = 0; i < C.rows(); i++) {
@@ -180,7 +181,7 @@ int VogelsMethod::index_of_min_element_in_col(const Matrix &C, int col_index) {
 }
 
 void VogelsMethod::set_value(Matrix &X, Vector &S, Vector &D, int i, int j) {
-    int min_val = min(S[i], D[j]);
+    auto min_val = min(S[i], D[j]);
     X(i, j) = min_val;
     S[i] -= min_val;
     D[j] -= min_val;
@@ -196,7 +197,7 @@ void VogelsMethod::printSolution(Matrix &X, const Matrix &C){
         cout << "\n";
     }
 
-    int cost = 0;
+    double cost = 0;
     for (int i = 0; i < X.rows(); i++){
         for(int j = 0; j < X.columns(); j++){
             cost += X(i,j)*C(i,j);
