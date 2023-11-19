@@ -47,12 +47,12 @@ bool NorthwestCornerMethod::isSolvable(const Matrix &C, Vector &S, Vector &D){
     }
 
     if(num_of_negative_elements != 0) {
-        cout << "Method is not applicable!\n";
+        cout << "Method is not applicable!\n\n";
         return false;
     }
 
     if(sum_S != sum_D){
-        cout << "The problem is not balanced!\n";
+        cout << "The problem is not balanced!\n\n";
         return false;
     }
 
@@ -100,6 +100,6 @@ void NorthwestCornerMethod::printSolution(Matrix &X, const Matrix &C){
             cost += X(i,j)*C(i,j);
         }
     }
-    cout << "--The total distribution cost = " << cost << "\n\n";
+    cout << "--The total transportation cost = " << cost << "\n\n";
 }
 
