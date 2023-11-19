@@ -101,6 +101,7 @@ build CMakeFiles/Optimization_Assignment_3.dir/main.cpp.obj: CXX_COMPILER__Optim
 
 build Optimization_Assignment_3.exe: CXX_EXECUTABLE_LINKER__Optimization_Assignment_3_Debug CMakeFiles/Optimization_Assignment_3.dir/source/Matrix.cpp.obj CMakeFiles/Optimization_Assignment_3.dir/source/NorthwestCornerMethod.cpp.obj CMakeFiles/Optimization_Assignment_3.dir/source/RusselsMethod.cpp.obj CMakeFiles/Optimization_Assignment_3.dir/source/Vector.cpp.obj CMakeFiles/Optimization_Assignment_3.dir/source/VogelsMethod.cpp.obj CMakeFiles/Optimization_Assignment_3.dir/main.cpp.obj
   FLAGS = -g
+  LINK_FLAGS = -static-libgcc -static-libstdc++
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Optimization_Assignment_3.dir
   POST_BUILD = cd .

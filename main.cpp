@@ -36,6 +36,6 @@ void perform() {
 
 int main() {
     perform();
-    //system("pause");
+    system("pause");
     return EXIT_SUCCESS;
 }
