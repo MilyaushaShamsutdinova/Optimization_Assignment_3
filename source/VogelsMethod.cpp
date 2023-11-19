@@ -1,7 +1,6 @@
 #include "../headers/VogelsMethod.hpp"
 
 #include <iostream>
-#include <climits>
 #include <cfloat>
 
 using namespace std;
@@ -49,14 +48,14 @@ void VogelsMethod::start_method(Matrix C, Vector S, Vector D) {
             if(D[col_index] == 0) {
                 col_difference[col_index] = -1;
                 for (int i = 0; i < m; ++i) {
-                    C(i, col_index) = INT_MAX;
+                    C(i, col_index) = DBL_MAX;
                 }
                 calculate_row_difference(C, row_difference);
             }
             if (S[row_index] == 0) {
                 row_difference[row_index] = -1;
                 for (int i = 0; i < n; ++i) {
-                    C(row_index, i) = INT_MAX;
+                    C(row_index, i) = DBL_MAX;
                 }
                 calculate_col_difference(C, col_difference);
             }
